@@ -1,0 +1,22 @@
+name: SonarQube Scan
+
+on:
+  push:
+    branches:
+      - main  # Change this if your default branch is different
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          sonar-project-key: 'your_project_key'  # Replace with your project key
+          sonar-project-name: 'Your Project Name'  # Replace with your project name
+          sonar-project-version: '1.0'
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-login: ${{ secrets.SONAR_TOKEN }}
